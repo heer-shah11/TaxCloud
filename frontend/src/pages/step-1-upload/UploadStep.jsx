@@ -4,7 +4,7 @@ import {
   ChevronRight, Download, Loader2, CheckCircle2,
 } from 'lucide-react';
 import { api } from '../../api';
-import './UploadStep.css';
+
 
 const MAX_MB = 15;
 const MAX_BYTES = MAX_MB * 1024 * 1024;
