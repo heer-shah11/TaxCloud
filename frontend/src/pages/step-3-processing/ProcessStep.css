@@ -1,0 +1,24 @@
+.sub{font-size:12px;margin:22px 0 10px;color:#263247}
+.primary.ghost{background:#fff;color:#2563eb;border:1px solid #cfe0ff;margin-left:8px}
+.spin{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.step3-error{margin-top:12px}
+.failbox{margin-top:14px;background:#fff5f5;border:1px solid #ffdada;border-radius:9px;padding:12px 14px;color:#b83232;font-size:12px}
+.failbox b{display:flex;gap:6px;align-items:center}
+.failbox p{margin:8px 0 0;line-height:1.4}
+.warnbox{margin-top:14px;background:#fffbea;border:1px solid #f6e3a1;border-radius:9px;padding:12px 14px;color:#8a6d00;font-size:11px;line-height:1.5}
+.workers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.worker{border:1px solid #e3e8ef;background:#f7f9fc;border-radius:10px;padding:13px;display:flex;flex-direction:column;gap:5px;font-size:12px;color:#748095}
+.worker b{color:#263247}
+.worker small{font-size:10px;color:#8993a4}
+.worker .wstate{font-size:11px;font-weight:650;text-transform:capitalize}
+.worker.idle .wstate{color:#168354}
+.worker.busy{background:#fff8e6;border-color:#f6d98a}
+.worker.busy .wstate{color:#b7791f}
+.worker.offline{background:#fff1f1;border-color:#ffdede}
+.worker.offline .wstate{color:#c33}
+.batchlist{max-height:300px;overflow:auto}
+.bstatus.queued{color:#8993a4}
+.bstatus.completed{color:#168354}
+.bstatus.failed{color:#c33}
+@media(max-width:720px){.workers{grid-template-columns:1fr}}

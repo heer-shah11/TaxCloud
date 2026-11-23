@@ -1,0 +1,6 @@
+.gain{color:#168354}
+.loss{color:#c33}
+.primary.ghost{background:#fff;color:#2563eb;border:1px solid #cfe0ff;margin-left:8px}
+.notready{min-height:220px;background:#fbfcfe;border:1px dashed #d9e0e9;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;color:#3974d9;margin-top:16px}
+.notready h3{color:#263247;margin:12px 0 6px;font-size:15px}
+.notready p{max-width:380px;line-height:1.5;color:#748095;font-size:12px;margin:0}

@@ -5,13 +5,16 @@ from fastapi.responses import FileResponse
 from .config import DATA_DIR
 from .db import init,db
 from .schemas import Configure
-from .logic import read_excel,create_job,get_job,details,configure,start,complete,fail,make_report
+from .logic import queue,read_excel,create_job,get_job,details,configure,start,complete,fail,make_report
 app=FastAPI(title="TaxCloud API",version="1.0.0")
 app.add_middleware(CORSMiddleware,allow_origins=["*"],allow_methods=["*"],allow_headers=["*"])
 @app.on_event("startup")
 def startup():init()
 @app.get("/api/health")
 def health():return {"status":"ok","service":"TaxCloud API"}
+@app.get("/api/workers")
+def workers():
+    return {"workers":[{"name":n,"status":queue.get(f"taxcloud:worker:{n}") or "offline"} for n in ("worker-1","worker-2","worker-3")]}
 @app.post("/api/jobs/upload")
 async def upload(file:UploadFile=File(...)):
     if not file.filename.lower().endswith(".xlsx"):raise HTTPException(400,"Only .xlsx files are supported.")

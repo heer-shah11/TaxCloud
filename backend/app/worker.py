@@ -2,11 +2,16 @@ import json,os,requests
 from redis import Redis
 from .config import REDIS_URL
 r=Redis.from_url(REDIS_URL,decode_responses=True);NAME=os.getenv("WORKER_NAME","worker")
+def mark(state):
+    try:r.set(f"taxcloud:worker:{NAME}",state,ex=20)  # expires => shows offline if the worker dies
+    except Exception:pass
 def main():
-    print(NAME,"waiting for batches")
+    print(NAME,"waiting for batches");mark("idle")
     while True:
         item=r.blpop("taxcloud:queue",timeout=5)
-        if not item:continue
+        if not item:
+            mark("idle");continue
+        mark("busy")
         t=json.loads(item[1])
         try:
             output=[]
@@ -19,4 +24,5 @@ def main():
         except Exception as e:
             try:requests.post("http://api:8000/internal/fail",json={"batch_id":t["batch_id"],"job_id":t["job_id"],"worker_name":NAME,"error":str(e)},timeout=20)
             except Exception:print("Could not report error",e)
+        finally:mark("idle")
 if __name__=="__main__":main()
